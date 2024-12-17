@@ -11,7 +11,6 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { WidthFull } from "@mui/icons-material";
 
 interface EventData {
   id: string;
@@ -22,9 +21,9 @@ interface EventData {
 }
 
 const CalendarPage = () => {
-  const [events, setEvents] = useState<EventData[]>([]);
+  const [events, setEvents] = useState<EventData[]>([]); // Ensure events is typed as an array of EventData
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState<Partial<EventData>>({});
+  const [currentEvent, setCurrentEvent] = useState<Partial<EventData>>({}); // currentEvent is typed as Partial<EventData>
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const handleDateClick = (info: any) => {
@@ -49,14 +48,11 @@ const CalendarPage = () => {
     if (editingId) {
       setEvents(
         events.map((e) =>
-          e.id === editingId ? { ...currentEvent, id: editingId } : e
+          e.id === editingId ? { ...e, ...currentEvent } : e
         )
       );
     } else {
-      setEvents([
-        ...events,
-        { ...currentEvent, id: Date.now().toString() } as EventData,
-      ]);
+      setEvents([ ...events, { ...currentEvent, id: Date.now().toString() } as EventData ]);
     }
 
     setDialogOpen(false);
