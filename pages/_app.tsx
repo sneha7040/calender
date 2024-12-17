@@ -1,6 +1,22 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import { AppProps } from 'next/app';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Wrapper from '@/layout/wrapper/wrapper';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+        <Wrapper>
+       <Component {...pageProps} />
+    </Wrapper>
+    
+    </>
+
+
+     
+   
+  );
 }
+
+export default MyApp;
